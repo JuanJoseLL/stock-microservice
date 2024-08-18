@@ -1,9 +1,11 @@
 package com.emazon.stock.infrastructure.out.jpa.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Data
@@ -14,7 +16,13 @@ public class CategoryJPA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
+    @Size(min = 3, max = 50, message = "Category name must be between 3 and 50 characters")
     private String name;
+
+    @NotNull
+    @Size(max = 90, message = "Category description must be less than 90 characters")
     private String description;
 
 }

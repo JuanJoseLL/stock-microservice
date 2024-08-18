@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICategoryServicePort {
 
-    Category addCategory(Category category);
+    void save(Category category);
     Category updateCategory(Category category);
     void deleteCategory(Long categoryId);
     Category getCategoryById(Long categoryId);
