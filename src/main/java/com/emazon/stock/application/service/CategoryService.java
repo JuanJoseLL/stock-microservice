@@ -5,13 +5,14 @@ import com.emazon.stock.application.dto.CategoryDTO;
 import com.emazon.stock.application.mapper.CategoryRequestMapper;
 import com.emazon.stock.domain.api.ICategoryServicePort;
 import com.emazon.stock.domain.model.Category;
-import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CategoryService implements ICategoryService{
+public class CategoryService implements ICategoryService {
 
     private final ICategoryServicePort categoryServicePort;
     private final CategoryRequestMapper categoryRequestMapper;
@@ -47,5 +48,10 @@ public class CategoryService implements ICategoryService{
     @Override
     public void deleteCategory(Long id) {
 
+    }
+
+    @Override
+    public Page<Category> findAllCategories(Pageable pageable) {
+        return categoryServicePort.findAllCategories(pageable);
     }
 }
