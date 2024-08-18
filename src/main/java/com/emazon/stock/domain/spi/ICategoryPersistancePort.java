@@ -11,5 +11,5 @@ public interface ICategoryPersistancePort {
     void deleteCategory(Long categoryId);
     Category getCategoryById(Long categoryId);
     List<Category> getAllCategories();
-
+    boolean existsByName(String name);
 }

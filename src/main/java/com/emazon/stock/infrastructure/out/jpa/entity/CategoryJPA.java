@@ -17,12 +17,13 @@ public class CategoryJPA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 50)
     @Size(min = 3, max = 50, message = "Category name must be between 3 and 50 characters")
     private String name;
 
     @NotNull
     @Size(max = 90, message = "Category description must be less than 90 characters")
+    @Column(length = 90)
     private String description;
 
 }

@@ -42,4 +42,9 @@ public class CategoryJpaAdapter implements ICategoryPersistancePort {
     public List<Category> getAllCategories() {
         return List.of();
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return categoryRepository.existsByName(name);
+    }
 }

@@ -24,11 +24,8 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public CategoryDTO save(CategoryDTO category) {
-        System.out.printf("CategoryService.save %s\n", category.getName());
         Category cat = categoryRequestMapper.toEntity(category);
-        System.out.printf("mapper");
         categoryServicePort.save(cat);
-        System.out.println("CategoryService.save");
         return category;
     }
 

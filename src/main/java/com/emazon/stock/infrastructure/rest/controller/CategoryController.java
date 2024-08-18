@@ -3,6 +3,7 @@ package com.emazon.stock.infrastructure.rest.controller;
 import com.emazon.stock.application.dto.CategoryDTO;
 import com.emazon.stock.application.service.ICategoryService;
 import com.emazon.stock.domain.model.Category;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO category) {
+    public ResponseEntity<CategoryDTO> createCategory( @RequestBody CategoryDTO category) {
         categoryService.save(category);
         System.out.println("CategoryController.createCategory");
         return ResponseEntity.status(HttpStatus.CREATED).build();
