@@ -31,26 +31,6 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public Category getCategoryById(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<Category> getAllCategories() {
-        return List.of();
-    }
-
-    @Override
-    public Category updateCategory(Category category) {
-        return null;
-    }
-
-    @Override
-    public void deleteCategory(Long id) {
-
-    }
-
-    @Override
     public Page<Category> findAllCategories(Pageable pageable) {
         return categoryServicePort.findAllCategories(pageable);
     }

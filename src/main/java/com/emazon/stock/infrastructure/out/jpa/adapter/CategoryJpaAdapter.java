@@ -26,26 +26,6 @@ public class CategoryJpaAdapter implements ICategoryPersistancePort {
     }
 
     @Override
-    public Category updateCategory(Category category) {
-        return null;
-    }
-
-    @Override
-    public void deleteCategory(Long categoryId) {
-
-    }
-
-    @Override
-    public Category getCategoryById(Long categoryId) {
-        return null;
-    }
-
-    @Override
-    public List<Category> getAllCategories() {
-        return List.of();
-    }
-
-    @Override
     public boolean existsByName(String name) {
         return categoryRepository.existsByName(name);
     }

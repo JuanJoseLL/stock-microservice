@@ -41,26 +41,6 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public Category updateCategory(Category category) {
-        return null;
-    }
-
-    @Override
-    public void deleteCategory(Long categoryId) {
-
-    }
-
-    @Override
-    public Category getCategoryById(Long categoryId) {
-        return null;
-    }
-
-    @Override
-    public List<Category> getAllCategories() {
-        return List.of();
-    }
-
-    @Override
     public Page<Category> findAllCategories(Pageable pageable) {
         return categoryPersistancePort.findAllCategories(pageable);
     }
