@@ -38,7 +38,7 @@ public class CategoryController {
         Sort.Direction sortDirection = sort.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "name"));
         Page<Category> categoryResponses = categoryService.findAllCategories(pageable);
-        System.out.println("CategoryController.getCategory");
+
         return ResponseEntity.ok(categoryResponses);
 
     }

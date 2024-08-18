@@ -10,6 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -73,4 +80,30 @@ class CategoryUseCaseTest {
         assertThrows(CategoryDescriptionMissingException.class, () -> categoryUseCase.save(category));
         verify(categoryPersistancePort, never()).save(category);
     }
+
+    @Test
+    void findAllCategories_ShouldReturnPageOfCategories() {
+        // Arrange
+        Pageable pageable = PageRequest.of(0, 10);
+        List<Category> categories = Arrays.asList(
+                new Category(1L,"Electronics", "Electronic devices"),
+                new Category(2L, "Books", "Various books")
+        );
+        Page<Category> expectedPage = new PageImpl<>(categories, pageable, categories.size());
+
+        when(categoryPersistancePort.findAllCategories(pageable)).thenReturn(expectedPage);
+
+        // Act
+        Page<Category> result = categoryUseCase.findAllCategories(pageable);
+
+        // Assert
+        assertEquals(expectedPage, result);
+        assertEquals(2, result.getContent().size());
+        assertEquals("Electronics", result.getContent().get(0).getName());
+        assertEquals("Books", result.getContent().get(1).getName());
+
+        verify(categoryPersistancePort, times(1)).findAllCategories(pageable);
+    }
+
+
 }
