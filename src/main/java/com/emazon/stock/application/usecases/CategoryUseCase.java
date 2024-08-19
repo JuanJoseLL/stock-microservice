@@ -1,4 +1,4 @@
-package com.emazon.stock.domain.usecases;
+package com.emazon.stock.application.usecases;
 
 import com.emazon.stock.domain.api.ICategoryServicePort;
 import com.emazon.stock.domain.model.Category;
