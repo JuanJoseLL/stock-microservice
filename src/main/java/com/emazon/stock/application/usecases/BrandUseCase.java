@@ -38,6 +38,6 @@ public class BrandUseCase implements IBrandServicePort {
 
     @Override
     public Page<Brand> findAllBrands(Pageable pageable) {
-        return null;
+        return brandPersistancePort.findAllBrands(pageable);
     }
 }

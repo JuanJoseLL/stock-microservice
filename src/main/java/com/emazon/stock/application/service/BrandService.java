@@ -34,6 +34,6 @@ public class BrandService implements IBrandService {
 
     @Override
     public Page<BrandResponse> findAllBrands(Pageable pageable) {
-        return null;
+        return brandResponseMapper.toBrandResponsePage(brandServicePort.findAllBrands(pageable));
     }
 }

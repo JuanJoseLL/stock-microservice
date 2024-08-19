@@ -30,6 +30,6 @@ public class BrandJpaAdapter implements IBrandPersistancePort {
 
     @Override
     public Page<Brand> findAllBrands(Pageable pageable) {
-        return null;
+        return brandEntityMapper.toBrandResponsePage(brandRepository.findAll(pageable));
     }
 }

@@ -1,11 +1,19 @@
 package com.emazon.stock.application.usecases;
 
 import com.emazon.stock.domain.model.Brand;
+import com.emazon.stock.domain.model.Category;
 import com.emazon.stock.domain.spi.IBrandPersistancePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -79,6 +87,30 @@ class BrandUseCaseTest {
         // Act & Assert
         assertThrows(RuntimeException.class, () -> brandUseCase.save(brand));
         verify(brandPersistancePort, never()).save(brand);
+    }
+
+    @Test
+    void findAllBrands_ShouldReturnPageOfBrands() {
+        // Arrange
+        Pageable pageable = PageRequest.of(0, 10);
+        List<Brand> brands = Arrays.asList(
+                new Brand(1L,"Electronics", "Electronic devices"),
+                new Brand(2L, "Books", "Various books")
+        );
+        Page<Brand> expectedPage = new PageImpl<>(brands, pageable, brands.size());
+
+        when(brandPersistancePort.findAllBrands(pageable)).thenReturn(expectedPage);
+
+        // Act
+        Page<Brand> result = brandUseCase.findAllBrands(pageable);
+
+        // Assert
+        assertEquals(expectedPage, result);
+        assertEquals(2, result.getContent().size());
+        assertEquals("Electronics", result.getContent().get(0).getName());
+        assertEquals("Books", result.getContent().get(1).getName());
+
+        verify(brandPersistancePort, times(1)).findAllBrands(pageable);
     }
 
 }
