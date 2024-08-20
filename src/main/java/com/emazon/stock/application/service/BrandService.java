@@ -27,7 +27,7 @@ public class BrandService implements IBrandService {
 
     @Override
     public BrandResponse saveBrand(BrandRequest brandRequest) {
-        Brand brand = brandRequestMapper.toCategory(brandRequest);
+        Brand brand = brandRequestMapper.toBrand(brandRequest);
         brandServicePort.save(brand);
         return brandResponseMapper.toBrandResponse(brand);
     }

@@ -47,6 +47,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(Collections.singletonMap(MESSAGE, ExceptionResponse.CATEGORY_NAME_TOO_LONG.getMessage()));
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, String>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, ex.getMessage()));
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, String>> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Collections.singletonMap(MESSAGE, ex.getMessage()));
+    }
+
 
 
 

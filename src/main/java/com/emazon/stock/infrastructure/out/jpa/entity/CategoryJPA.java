@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.Size;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -25,5 +27,10 @@ public class CategoryJPA {
     @Size(max = 90, message = "Category description must be less than 90 characters")
     @Column(length = 90)
     private String description;
+
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categories")
+    private Set<ArticleJPA> articles;
 
 }

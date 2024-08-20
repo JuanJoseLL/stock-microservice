@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Article {
 
     private Long id;
-    private String article_id;
+    private String[] category_id;
     private String brand_id;
     private Long price;
     private int stock;
