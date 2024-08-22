@@ -1,15 +1,15 @@
 package com.emazon.stock.infrastructure.configuration;
 
 
-import com.emazon.stock.application.usecases.ArticleUseCase;
-import com.emazon.stock.application.usecases.BrandUseCase;
+import com.emazon.stock.domain.usecases.ArticleUseCase;
+import com.emazon.stock.domain.usecases.BrandUseCase;
 import com.emazon.stock.domain.api.IArticleServicePort;
 import com.emazon.stock.domain.api.IBrandServicePort;
 import com.emazon.stock.domain.api.ICategoryServicePort;
 import com.emazon.stock.domain.spi.IArticlePersistancePort;
 import com.emazon.stock.domain.spi.IBrandPersistancePort;
 import com.emazon.stock.domain.spi.ICategoryPersistancePort;
-import com.emazon.stock.application.usecases.CategoryUseCase;
+import com.emazon.stock.domain.usecases.CategoryUseCase;
 import com.emazon.stock.infrastructure.out.jpa.adapter.ArticleJpaAdapter;
 import com.emazon.stock.infrastructure.out.jpa.adapter.BrandJpaAdapter;
 import com.emazon.stock.infrastructure.out.jpa.adapter.CategoryJpaAdapter;

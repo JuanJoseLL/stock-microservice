@@ -33,9 +33,8 @@ public class BrandController {
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "asc") String sort
     ) {
-        Sort.Direction sortDirection = sort.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "name"));
-        Page<BrandResponse> brandResponses = brandService.findAllBrands(pageable);
+
+        Page<BrandResponse> brandResponses = brandService.findAllBrands(page, size, sort);
 
         return ResponseEntity.ok(brandResponses);
 

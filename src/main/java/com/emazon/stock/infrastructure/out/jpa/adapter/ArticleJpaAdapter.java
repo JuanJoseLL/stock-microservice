@@ -1,7 +1,6 @@
 package com.emazon.stock.infrastructure.out.jpa.adapter;
 
 
-import com.emazon.stock.domain.api.IArticleServicePort;
 import com.emazon.stock.domain.model.Article;
 import com.emazon.stock.domain.spi.IArticlePersistancePort;
 import com.emazon.stock.infrastructure.out.jpa.entity.ArticleJPA;
@@ -21,8 +20,9 @@ public class ArticleJpaAdapter implements IArticlePersistancePort {
     @Override
     public Article save(Article article) {
         ArticleJPA articleJpa = articleEntityMapper.toEntity(article);
-
-        return articleEntityMapper.toArticle(articleRepository.save(articleJpa));
+        Article articleResponse = articleEntityMapper.toArticle(articleRepository.save(articleJpa));
+        System.out.println(articleResponse);
+        return articleResponse;
     }
 
     @Override

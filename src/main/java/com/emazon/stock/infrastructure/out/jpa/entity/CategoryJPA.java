@@ -29,7 +29,6 @@ public class CategoryJPA {
     private String description;
 
 
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categories")
     private Set<ArticleJPA> articles;
 

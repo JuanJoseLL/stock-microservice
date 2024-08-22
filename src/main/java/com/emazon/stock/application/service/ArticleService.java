@@ -27,7 +27,7 @@ public class ArticleService implements IArticleService{
     public ArticleResponse save(ArticleRequest articleRequest) {
         Article article = articleRequestMapper.toArticle(articleRequest);
         articleServicePort.save(article);
-
+        System.out.println("Service: "+article);
         return articleResponseMapper.toArticleResponse(article);
     }
 

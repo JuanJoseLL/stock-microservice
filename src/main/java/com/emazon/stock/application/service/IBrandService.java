@@ -8,5 +8,5 @@ import org.springframework.data.domain.Pageable;
 public interface IBrandService {
 
     BrandResponse saveBrand(BrandRequest brand);
-    Page<BrandResponse> findAllBrands(Pageable pageable);
+    Page<BrandResponse> findAllBrands(int page, int size, String sort);
 }

@@ -2,6 +2,7 @@ package com.emazon.stock.application.usecases;
 
 import com.emazon.stock.domain.model.Category;
 import com.emazon.stock.domain.spi.ICategoryPersistancePort;
+import com.emazon.stock.domain.usecases.CategoryUseCase;
 import com.emazon.stock.infrastructure.exception.CategoryAlreadyExistException;
 import com.emazon.stock.infrastructure.exception.CategoryDescriptionMissingException;
 import com.emazon.stock.infrastructure.exception.CategoryDescriptionTooLongException;

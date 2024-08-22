@@ -1,6 +1,5 @@
 package com.emazon.stock.domain.usecases;
 
-import com.emazon.stock.application.usecases.CategoryUseCase;
 import com.emazon.stock.domain.model.Category;
 import com.emazon.stock.domain.spi.ICategoryPersistancePort;
 import com.emazon.stock.infrastructure.exception.CategoryAlreadyExistException;

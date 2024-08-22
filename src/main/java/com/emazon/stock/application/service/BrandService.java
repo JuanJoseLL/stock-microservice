@@ -33,7 +33,7 @@ public class BrandService implements IBrandService {
     }
 
     @Override
-    public Page<BrandResponse> findAllBrands(Pageable pageable) {
-        return brandResponseMapper.toBrandResponsePage(brandServicePort.findAllBrands(pageable));
+    public Page<BrandResponse> findAllBrands(int page, int size, String sort) {
+        return brandResponseMapper.toBrandResponsePage(brandServicePort.findAllBrands(page, size, sort));
     }
 }

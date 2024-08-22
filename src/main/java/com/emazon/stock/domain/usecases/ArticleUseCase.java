@@ -1,4 +1,4 @@
-package com.emazon.stock.application.usecases;
+package com.emazon.stock.domain.usecases;
 
 import com.emazon.stock.domain.api.IArticleServicePort;
 import com.emazon.stock.domain.model.Article;
@@ -22,7 +22,8 @@ public class ArticleUseCase implements IArticleServicePort {
     @Override
     public Article save(Article article) {
         validateArticleCategories(article);
-        return null;
+
+        return articlePersistancePort.save(article);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class ArticleUseCase implements IArticleServicePort {
 
 
     private void validateArticleCategories(Article article) {
-        String[] categoryIds = article.getCategory_id();
+        Category[] categoryIds = article.getCategory();
 
         if (categoryIds == null || categoryIds.length == 0) {
             throw new IllegalArgumentException("The Article must have at least one category associated.");
@@ -42,8 +43,8 @@ public class ArticleUseCase implements IArticleServicePort {
             throw new IllegalArgumentException("The Article can have a maximum of 3 categories.");
         }
 
-        Set<String> uniqueCategoryIds = new HashSet<>();
-        for (String categoryId : categoryIds) {
+        Set<Category> uniqueCategoryIds = new HashSet<>();
+        for (Category categoryId : categoryIds) {
             if (!uniqueCategoryIds.add(categoryId)) {
                 throw new IllegalArgumentException("The Article cannot have duplicate categories.");
             }

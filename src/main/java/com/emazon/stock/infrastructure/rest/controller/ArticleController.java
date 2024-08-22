@@ -21,7 +21,9 @@ public class ArticleController {
 
     @PostMapping
     public ResponseEntity<ArticleResponse> saveArticle(@RequestBody ArticleRequest articleRequest) {
+        System.out.println("Controller"+articleRequest);
         ArticleResponse articleResponse = articleService.save(articleRequest);
+        System.out.println("Controller"+articleResponse);
         return new ResponseEntity<>(articleResponse, HttpStatus.CREATED);
     }
 }

@@ -1,7 +1,8 @@
-package com.emazon.stock.application.usecases;
+package com.emazon.stock.domain.usecases;
 
 import com.emazon.stock.domain.api.IBrandServicePort;
 import com.emazon.stock.domain.model.Brand;
+import com.emazon.stock.domain.model.PageModel;
 import com.emazon.stock.domain.spi.IBrandPersistancePort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,7 @@ public class BrandUseCase implements IBrandServicePort {
     }
 
     @Override
-    public Page<Brand> findAllBrands(Pageable pageable) {
-        return brandPersistancePort.findAllBrands(pageable);
+    public PageModel<Brand> findAllBrands(int page, int size, String sort) {
+        return brandPersistancePort.findAllBrands(page, size, sort);
     }
 }
