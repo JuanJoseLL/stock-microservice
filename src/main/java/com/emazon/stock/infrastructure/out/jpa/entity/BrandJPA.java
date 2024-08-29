@@ -3,19 +3,17 @@ package com.emazon.stock.infrastructure.out.jpa.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "brand")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "BRAND")
+@EqualsAndHashCode(exclude = "articles")
+@ToString(exclude = "articles")
 public class BrandJPA {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +25,6 @@ public class BrandJPA {
     @NotNull
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "brand")
-    private Set<ArticleJPA> articles;
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    private Set<ArticleJPA> articles = new HashSet<>();
 }

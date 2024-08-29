@@ -1,17 +1,15 @@
 package com.emazon.stock.infrastructure.rest.controller;
 
-import com.emazon.stock.application.dto.CategoryDTO;
+import com.emazon.stock.application.dto.CategoryRequest;
+import com.emazon.stock.application.dto.CategoryResponse;
 import com.emazon.stock.application.service.ICategoryService;
-import com.emazon.stock.domain.model.Category;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,14 +28,13 @@ public class CategoryController {
             @ApiResponse(responseCode = "500", description = "Server internal error", content = @Content)
     })
     @GetMapping
-    public ResponseEntity<Page<Category>> getCategory(
+    public ResponseEntity<Page<CategoryResponse>> getCategory(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "asc") String sort
     ) {
-        Sort.Direction sortDirection = sort.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "name"));
-        Page<Category> categoryResponses = categoryService.findAllCategories(pageable);
+
+        Page<CategoryResponse> categoryResponses = categoryService.findAllCategories(page, size, sort);
 
         return ResponseEntity.ok(categoryResponses);
 
@@ -50,7 +47,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Category already exists", content = @Content)
     })
     @PostMapping
-    public ResponseEntity<CategoryDTO> createCategory( @RequestBody CategoryDTO category) {
+    public ResponseEntity<CategoryResponse> createCategory( @RequestBody CategoryRequest category) {
         categoryService.save(category);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();

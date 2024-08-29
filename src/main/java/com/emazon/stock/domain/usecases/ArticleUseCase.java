@@ -33,22 +33,23 @@ public class ArticleUseCase implements IArticleServicePort {
 
 
     private void validateArticleCategories(Article article) {
-        Category[] categoryIds = article.getCategory();
+        Set<Category> categories = article.getCategory();
 
-        if (categoryIds == null || categoryIds.length == 0) {
+        if (categories == null || categories.isEmpty()) {
             throw new IllegalArgumentException("The Article must have at least one category associated.");
         }
 
-        if (categoryIds.length > 3) {
+        if (categories.size() > 3) {
             throw new IllegalArgumentException("The Article can have a maximum of 3 categories.");
         }
 
-        Set<Category> uniqueCategoryIds = new HashSet<>();
-        for (Category categoryId : categoryIds) {
-            if (!uniqueCategoryIds.add(categoryId)) {
+        Set<Category> uniqueCategories = new HashSet<>();
+        for (Category category : categories) {
+            if (!uniqueCategories.add(category)) {
                 throw new IllegalArgumentException("The Article cannot have duplicate categories.");
             }
         }
     }
+
 
 }

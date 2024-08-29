@@ -2,18 +2,17 @@ package com.emazon.stock.infrastructure.out.jpa.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "category")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "CATEGORY")
+@EqualsAndHashCode(exclude = "articles")
+@ToString(exclude = "articles")
 public class CategoryJPA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +27,6 @@ public class CategoryJPA {
     @Column(length = 90)
     private String description;
 
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categories")
-    private Set<ArticleJPA> articles;
-
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    private Set<ArticleJPA> articles = new HashSet<>();
 }

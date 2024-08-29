@@ -18,8 +18,9 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public abstract class CategoryEntityMapper {
 
-
+    @Mapping(target = "articles", ignore = true)
     public abstract CategoryJPA toEntity(Category category);
+
 
     public abstract Category toDTO(CategoryJPA categoryEntity);
 

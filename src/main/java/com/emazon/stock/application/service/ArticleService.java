@@ -9,8 +9,9 @@ import com.emazon.stock.domain.model.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Transactional
 @Service
 public class ArticleService implements IArticleService{
 
@@ -27,7 +28,6 @@ public class ArticleService implements IArticleService{
     public ArticleResponse save(ArticleRequest articleRequest) {
         Article article = articleRequestMapper.toArticle(articleRequest);
         articleServicePort.save(article);
-        System.out.println("Service: "+article);
         return articleResponseMapper.toArticleResponse(article);
     }
 

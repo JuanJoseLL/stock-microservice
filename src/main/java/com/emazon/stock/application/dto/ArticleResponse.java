@@ -4,11 +4,12 @@ import com.emazon.stock.domain.model.Brand;
 import com.emazon.stock.domain.model.Category;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public record ArticleResponse(
         double price,
         int stock,
-        Brand brand,
-        Category[] category
+        BrandResponse brand,
+        Set<CategoryResponse> category
 ) implements Serializable {
 }

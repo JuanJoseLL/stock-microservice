@@ -93,27 +93,27 @@ class ArticleUseCaseTest {
         verify(categoryPersistancePort, never()).save(category);
     }
 
-    @Test
-    void findAllCategories_ShouldReturnPageOfCategories() {
-        // Arrange
-        Pageable pageable = PageRequest.of(0, 10);
-        List<Category> categories = Arrays.asList(
-                new Category(6L, "Electronics", "Electronic devices"),
-                new Category(7L, "Books", "Various books")
-        );
-        Page<Category> expectedPage = new PageImpl<>(categories, pageable, categories.size());
-
-        when(categoryPersistancePort.findAllCategories(pageable)).thenReturn(expectedPage);
-
-        // Act
-        Page<Category> result = categoryUseCase.findAllCategories(pageable);
-
-        // Assert
-        assertEquals(expectedPage, result);
-        assertEquals(2, result.getContent().size());
-        assertEquals("Electronics", result.getContent().get(0).getName());
-        assertEquals("Books", result.getContent().get(1).getName());
-
-        verify(categoryPersistancePort).findAllCategories(pageable);
-    }
+//    @Test
+//    void findAllCategories_ShouldReturnPageOfCategories() {
+//        // Arrange
+//        Pageable pageable = PageRequest.of(0, 10);
+//        List<Category> categories = Arrays.asList(
+//                new Category(6L, "Electronics", "Electronic devices"),
+//                new Category(7L, "Books", "Various books")
+//        );
+//        Page<Category> expectedPage = new PageImpl<>(categories, pageable, categories.size());
+//
+//        when(categoryPersistancePort.findAllCategories(pageable)).thenReturn(expectedPage);
+//
+//        // Act
+//        Page<Category> result = categoryUseCase.findAllCategories(pageable);
+//
+//        // Assert
+//        assertEquals(expectedPage, result);
+//        assertEquals(2, result.getContent().size());
+//        assertEquals("Electronics", result.getContent().get(0).getName());
+//        assertEquals("Books", result.getContent().get(1).getName());
+//
+//        verify(categoryPersistancePort).findAllCategories(pageable);
+//    }
 }

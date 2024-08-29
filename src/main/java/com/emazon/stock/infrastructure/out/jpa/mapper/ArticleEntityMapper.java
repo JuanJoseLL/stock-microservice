@@ -1,18 +1,28 @@
 package com.emazon.stock.infrastructure.out.jpa.mapper;
 
 import com.emazon.stock.domain.model.Article;
+import com.emazon.stock.domain.model.Brand;
+import com.emazon.stock.domain.model.Category;
 import com.emazon.stock.infrastructure.out.jpa.entity.ArticleJPA;
+import com.emazon.stock.infrastructure.out.jpa.entity.BrandJPA;
+import com.emazon.stock.infrastructure.out.jpa.entity.CategoryJPA;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring",
-        unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE,
-        unmappedSourcePolicy = org.mapstruct.ReportingPolicy.IGNORE)
-public abstract class ArticleEntityMapper {
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-    public abstract ArticleJPA toEntity(Article article);
+@Mapper(componentModel = "spring", uses = {BrandEntityMapper.class, CategoryEntityMapper.class})
+public interface ArticleEntityMapper {
 
-    public abstract Article toArticle(ArticleJPA articleEntity);
+    @Mapping(target = "brand", source = "brand")
+    @Mapping(target = "categories", source = "category")
+    ArticleJPA toEntity(Article article);
 
+    @Mapping(target = "category", source = "categories")
+    @Mapping(target = "brand", source = "brand")
+    Article toArticle(ArticleJPA articleJPA);
 
 
 }

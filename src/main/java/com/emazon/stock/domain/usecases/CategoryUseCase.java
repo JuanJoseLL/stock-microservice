@@ -2,6 +2,7 @@ package com.emazon.stock.domain.usecases;
 
 import com.emazon.stock.domain.api.ICategoryServicePort;
 import com.emazon.stock.domain.model.Category;
+import com.emazon.stock.domain.model.PageModel;
 import com.emazon.stock.domain.spi.ICategoryPersistancePort;
 import com.emazon.stock.infrastructure.exception.CategoryAlreadyExistException;
 import com.emazon.stock.infrastructure.exception.CategoryDescriptionMissingException;
@@ -41,7 +42,7 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public Page<Category> findAllCategories(Pageable pageable) {
-        return categoryPersistancePort.findAllCategories(pageable);
+    public PageModel<Category> findAllCategories(int size, int page, String sort) {
+        return categoryPersistancePort.findAllCategories(page, size, sort);
     }
 }

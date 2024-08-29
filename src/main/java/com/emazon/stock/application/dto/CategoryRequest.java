@@ -2,8 +2,7 @@ package com.emazon.stock.application.dto;
 
 import java.io.Serializable;
 
-public record BrandResponse(
-        Long id,
+public record CategoryRequest (
         String name,
         String description
 ) implements Serializable {

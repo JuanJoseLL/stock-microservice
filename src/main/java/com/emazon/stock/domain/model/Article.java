@@ -5,13 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Article {
 
     private Long id;
-    private Category[] category;
+    private Set<Category> category;
     private Brand brand;
     private double price;
     private int stock;

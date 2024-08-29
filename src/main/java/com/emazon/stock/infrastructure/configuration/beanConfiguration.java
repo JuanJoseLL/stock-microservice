@@ -16,6 +16,7 @@ import com.emazon.stock.infrastructure.out.jpa.adapter.CategoryJpaAdapter;
 import com.emazon.stock.infrastructure.out.jpa.mapper.ArticleEntityMapper;
 import com.emazon.stock.infrastructure.out.jpa.mapper.BrandEntityMapper;
 import com.emazon.stock.infrastructure.out.jpa.mapper.CategoryEntityMapper;
+import com.emazon.stock.infrastructure.out.jpa.mapper.PageAdapterMapper;
 import com.emazon.stock.infrastructure.out.jpa.repository.IArticleRepository;
 import com.emazon.stock.infrastructure.out.jpa.repository.IBrandRepository;
 import com.emazon.stock.infrastructure.out.jpa.repository.ICategoryRepository;
@@ -37,10 +38,11 @@ public class beanConfiguration {
     private final IArticleRepository articleRepository;
     private final ArticleEntityMapper articleEntityMapper;
 
+    private final PageAdapterMapper pageAdapterMapper;
 
     @Bean
     public ICategoryPersistancePort categoryPersistancePort() {
-        return new CategoryJpaAdapter(categoryRepository, categoryEntityMapper);
+        return new CategoryJpaAdapter(categoryRepository, categoryEntityMapper, pageAdapterMapper);
     }
 
     @Bean
@@ -51,7 +53,7 @@ public class beanConfiguration {
 
     @Bean
     public IBrandPersistancePort brandPersistancePort() {
-        return new BrandJpaAdapter(brandRepository, brandEntityMapper);
+        return new BrandJpaAdapter(brandRepository, brandEntityMapper, pageAdapterMapper);
     }
 
     @Bean
@@ -61,7 +63,7 @@ public class beanConfiguration {
 
     @Bean
     public IArticlePersistancePort articlePersistancePort() {
-        return new ArticleJpaAdapter(articleRepository, articleEntityMapper);
+        return new ArticleJpaAdapter(articleRepository, articleEntityMapper, brandRepository, categoryRepository, brandEntityMapper, categoryEntityMapper);
     }
 
     @Bean
