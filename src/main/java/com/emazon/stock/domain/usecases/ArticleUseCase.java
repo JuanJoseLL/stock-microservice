@@ -3,6 +3,7 @@ package com.emazon.stock.domain.usecases;
 import com.emazon.stock.domain.api.IArticleServicePort;
 import com.emazon.stock.domain.model.Article;
 import com.emazon.stock.domain.model.Category;
+import com.emazon.stock.domain.model.PageModel;
 import com.emazon.stock.domain.spi.IArticlePersistancePort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +28,8 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
-    public Page<Article> findAllArticles(Pageable pageable) {
-        return null;
+    public PageModel<Article> findAllArticles(int page, int size, String sortDirection, String sortField) {
+        return articlePersistancePort.findAllArticles(page, size, sortDirection, sortField);
     }
 
 

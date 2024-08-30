@@ -32,7 +32,7 @@ public class ArticleService implements IArticleService{
     }
 
     @Override
-    public Page<Article> findAllArticles(Pageable pageable) {
-        return null;
+    public Page<ArticleResponse> findAllArticles(int page, int size, String sortDirection, String sortField) {
+        return articleResponseMapper.toItemResponsePage(articleServicePort.findAllArticles(page, size, sortDirection, sortField));
     }
 }

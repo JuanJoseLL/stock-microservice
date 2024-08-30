@@ -14,7 +14,7 @@ public interface ICategoryRepository extends JpaRepository<CategoryJPA, Long>{
     Optional<CategoryJPA> findById(Long categoryName);
 
     Page<CategoryJPA> findAll(Pageable pageable);
-
+    Optional <CategoryJPA> findByName(String name);
     void deleteById(Long categoryId);
     boolean existsByName(String name);
 }

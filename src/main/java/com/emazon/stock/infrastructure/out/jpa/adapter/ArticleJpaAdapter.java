@@ -3,6 +3,7 @@ package com.emazon.stock.infrastructure.out.jpa.adapter;
 
 import com.emazon.stock.domain.model.Article;
 import com.emazon.stock.domain.model.Category;
+import com.emazon.stock.domain.model.PageModel;
 import com.emazon.stock.domain.spi.IArticlePersistancePort;
 import com.emazon.stock.infrastructure.out.jpa.entity.ArticleJPA;
 import com.emazon.stock.infrastructure.out.jpa.entity.BrandJPA;
@@ -10,13 +11,16 @@ import com.emazon.stock.infrastructure.out.jpa.entity.CategoryJPA;
 import com.emazon.stock.infrastructure.out.jpa.mapper.ArticleEntityMapper;
 import com.emazon.stock.infrastructure.out.jpa.mapper.BrandEntityMapper;
 import com.emazon.stock.infrastructure.out.jpa.mapper.CategoryEntityMapper;
+import com.emazon.stock.infrastructure.out.jpa.mapper.PageAdapterMapper;
 import com.emazon.stock.infrastructure.out.jpa.repository.IArticleRepository;
 import com.emazon.stock.infrastructure.out.jpa.repository.IBrandRepository;
 import com.emazon.stock.infrastructure.out.jpa.repository.ICategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -35,6 +39,8 @@ public class ArticleJpaAdapter implements IArticlePersistancePort {
     private final ICategoryRepository categoryRepository;
     private final BrandEntityMapper brandEntityMapper;
     private final CategoryEntityMapper categoryEntityMapper;
+    private final PageAdapterMapper pageAdapterMapper;
+
     @Override
     @Transactional
     public Article save(Article article) {
@@ -73,7 +79,10 @@ public class ArticleJpaAdapter implements IArticlePersistancePort {
     }
 
     @Override
-    public Page<Article> findAllArticles(Pageable pageable) {
-        return null;
+    public PageModel<Article> findAllArticles(int page, int size, String sortDirection, String sortField) {
+        Sort.Direction sort = sortDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort, sortField));
+        return pageAdapterMapper.toPageModel(articleEntityMapper.toItemsPage(articleRepository.findAll(pageable)));
     }
 }
+

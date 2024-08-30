@@ -13,5 +13,6 @@ public interface IBrandRepository extends JpaRepository<BrandJPA, Long> {
 
     Page<BrandJPA> findAll(Pageable pageable);
     boolean existsByName(String name);
+    Optional<BrandJPA> findByName(String name);
     void deleteById(Long categoryId);
 }

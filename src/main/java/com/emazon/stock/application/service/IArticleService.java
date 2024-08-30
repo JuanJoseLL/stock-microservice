@@ -8,5 +8,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface IArticleService {
     ArticleResponse save(ArticleRequest article);
-    Page<Article> findAllArticles(Pageable pageable);
+    Page<ArticleResponse> findAllArticles(int page, int size, String sortDirection, String sortField);
 }
